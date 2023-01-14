@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:12 by charles           #+#    #+#             */
-/*   Updated: 2022/12/19 11:55:45 by charles          ###   ########.fr       */
+/*   Updated: 2023/01/14 18:57:59 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,111 @@
 
 int free_tab(char **strs)
 {
-    size_t  i;
+	size_t  i;
 
-    i = -1;
-    if (strs[i] || strs)
-    {
-        while (strs[++i])
-            free(strs[i]);
-        free(strs);
-    }
-    return (0);
+	i = -1;
+	if (!strs)
+		return (0);
+	if (strs[i] || strs)
+	{
+		while (strs[++i])
+			free(strs[i]);
+		free(strs);
+	}
+	return (0);
 }
 
-int ft_parsing(int count, char **av, t_data *s)
+int arg_space(char *av)
 {
-    ssize_t i;
-    size_t y;
-    i = 1;
+	size_t	i;
 
-    s->tab = malloc(count * sizeof(int));
-    if (!s->tab)
-        return 0;
-    while (av[i])
-    {
-        y = 0;
-        s->tab[i] = ft_atoi(av[i]);
-        if (s->tab[i] < INT_MIN || s->tab[i] > INT_MAX)
-            return (free_tab(av));
-        while (s->tab[y] <= i - 1)
-        {
-            if (s->tab[y] == s->tab[i])
-                return (ft_printf("Error"));
-            y++;
-        }
-        ft_printf("%d ", s->tab[i]);
-        i++;
-    }
-    //return (free_tab(av));
-    return 0;
+	i = 0;
+	while (av[i])
+	{
+		if (!ft_isdigit(av[i]) && av[i] != ' ' && av[i] != '-')
+			return (2);
+		if (av[i] == ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int ft_count_args(char **av, t_data *s)
+{	
+	s->count = 0;
+	s->i = 0;
+	while (av[++s->i])
+	{
+		if (arg_space(av[s->i]) == 1)
+		{
+			s->x = 0;
+			while (av[s->i][s->x])
+			{
+				while (av[s->i][s->x] == ' ' && av[s->i][s->x])
+					s->x++;
+				while (av[s->i][s->x] != ' ' && av[s->i][s->x])
+				{
+					s->x++;
+					if (av[s->i][s->x] == ' ' || !av[s->i][s->x])
+						s->count++;
+				}
+			}
+		}
+		else if (arg_space(av[s->i]) == 2)
+			return (1);
+		else
+			s->count++;
+	}
+	return (s->count);
 }
 
 
-
-int main(int ac, char **av)
+int	ft_check(int *tab, size_t count)
 {
-    int count;
-    t_data *s;
-    
-    s = malloc(sizeof(t_data));
-    count = ac - 1;
-    if (ac < 2)
-        return (ft_printf("Error\n"));
-    else
-    {
-        ft_parsing(count, av, s);
-    }
-    return (0);
+	size_t	i;
+	size_t	y;
+
+	i = -1;
+	while (++i < count + 1)
+	{
+		y = i;
+		while (++y < count)
+			if (tab[i] == tab[y])
+				return (ft_printf("Occurrence"), 1);
+	}
+	return (0);
+}
+
+int ft_parsing(char **av, t_data *s)
+{
+	ssize_t	i;
+	ssize_t	y;
+	ssize_t	x;
+	char **strs;
+	
+	i = 0;
+	x = 0;
+	s->tab = malloc(ft_count_args(av, s) * sizeof(int));
+	if (!s->tab)
+		return (0);
+	while (i < ft_count_args(av, s))
+	{
+		y = -1;
+		strs = ft_split(av[++x], ' ');
+		while (strs[++y])
+		{
+			if (ft_atoi(strs[y]) == 2136474848)
+				return (ft_printf("Overflow"), 1);
+			else
+			{
+				s->tab[++i] = ft_atoi(strs[y]);
+				ft_printf("%d", s->tab[i]);
+			}
+				
+		}
+	}
+	ft_check(s->tab, ft_count_args(av, s));
+	free_tab(strs);
+	return (0);
 }
