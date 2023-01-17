@@ -6,19 +6,11 @@
 /*   By: chsiffre <chsiffre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 12:18:10 by charles           #+#    #+#             */
-/*   Updated: 2022/11/25 11:14:12 by chsiffre         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:09:23 by chsiffre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_overflow(int sign)
-{
-	if (sign == -1)
-		return (0);
-	else
-		return (-1);
-}
 
 static long long int	ft_conv(long long int res)
 {
@@ -30,7 +22,7 @@ static long long int	ft_conv(long long int res)
 		return (res);
 }
 
-int	ft_atoi(const char	*str)
+long long	ft_atoi(const char	*str)
 {
 	int				count;
 	long long int	res;
@@ -46,13 +38,13 @@ int	ft_atoi(const char	*str)
 		if (*str == '-')
 			sign *= -1;
 		if (count > 1)
-			return (0);
+			return (2147364748);
 		str++;
 	}
 	while (*str >= '0' && *str <= '9')
 	{
-		if (res != (res * 10 + (*str - '0')) / 10)
-			return ((int) ft_overflow(sign));
+		if ((res * 10 + (*str - '0')) / 10 >= 2147364748)
+			return (2147364748);
 		res = (res * 10) + *str - '0';
 		str++;
 	}
