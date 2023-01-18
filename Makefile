@@ -55,7 +55,8 @@ LIB = 	${DIR_SRC}ft_memset.c \
 
 PUSH_SWAP =	${DIR_PUSH}parsing.c \
 			${DIR_PUSH}main.c \
-			${DIR_PUSH}sort.c
+			${DIR_PUSH}sort.c \
+			${DIR_PUSH}instructions.c
 			
 		
 LIST_OBJS = ${LIB:.c=.o} ${PUSH_SWAP:.c=.o}
