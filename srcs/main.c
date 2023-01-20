@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hdupuy <hdupuy@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:38:23 by charles           #+#    #+#             */
-/*   Updated: 2023/01/18 14:34:48 by charles          ###   ########.fr       */
+/*   Updated: 2023/01/20 15:55:06 by hdupuy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int ac, char **av)
 {
 	t_data	*s;
-	
+
 	s = malloc(sizeof(t_data));
 	if (ac < 2)
 		return (write(2, "Error\n", 6));
@@ -25,16 +25,17 @@ int	main(int ac, char **av)
 			return (free(s), write(2, "Error\n", 6), 0);
 		else
 			s->count = ft_count_args(av, s);
-		s->p_a = malloc(ft_count_args(av, s) * sizeof(int));
-		if (!s->p_a)
+		s->tab = malloc(ft_count_args(av, s) * sizeof(int));
+		if (!s->tab)
 			return (free(s),0);
 		ft_parsing(av, s);
 	}
 	if (!ft_is_sorted(s, s->count))
-		return (free(s->p_a), free(s), ft_printf("deja trie"), 0);
+		return (free(s->tab), free(s), ft_printf("deja trie"), 0);
 	ft_position(s, s->count);
-	ft_sort_big_stack(s, s->count);
-	free(s->p_a);
+    s->size_pb = 0;
+	ft_sort_big_stack(s);
+	free(s->tab);
 	free(s);
 	return (0);
 }

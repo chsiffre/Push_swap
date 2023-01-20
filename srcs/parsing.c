@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hdupuy <hdupuy@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:12 by charles           #+#    #+#             */
-/*   Updated: 2023/01/18 14:29:04 by charles          ###   ########.fr       */
+/*   Updated: 2023/01/20 14:14:08 by hdupuy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	arg_space(char *av)
 }
 
 int	ft_count_args(char **av, t_data *s)
-{	
+{
 	s->count = 0;
 	s->i = 0;
 	while (av[++s->i])
@@ -84,7 +84,7 @@ int	ft_check(t_data *s, ssize_t count)
 		y = i + 1;
 		while (y < count)
 		{
-			if (s->p_a[i] == s->p_a[y])
+			if (s->tab[i] == s->tab[y])
 				return (write(2, "Error\n", 6), 1);
 			y++;
 		}
@@ -111,7 +111,7 @@ int	ft_parsing(char **av, t_data *s)
 			if (ft_atoi(strs[y]) == 2147364748)
 				return (free_tab(strs), write(2, "Error\n", 6), 1);
 			else
-				s->p_a[i++] = ft_atoi(strs[y]);
+				s->tab[i++] = ft_atoi(strs[y]);
 		}
 		free_tab(strs);
 	}
