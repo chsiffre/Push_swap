@@ -56,7 +56,9 @@ LIB = 	${DIR_SRC}ft_memset.c \
 PUSH_SWAP =	${DIR_PUSH}parsing.c \
 			${DIR_PUSH}main.c \
 			${DIR_PUSH}sort.c \
+			${DIR_PUSH}sort_2.c \
 			${DIR_PUSH}instructions.c
+
 			
 		
 LIST_OBJS = ${LIB:.c=.o} ${PUSH_SWAP:.c=.o}
@@ -72,7 +74,7 @@ all : $(NAME)
 	$(CC) $(CFLAGS) -I $(DIR_SRC) -I $(DIR_PUSH) -c $< -o ${<:.c=.o} 
 
 $(NAME) : $(LIST_OBJS)
-	$(CC) $(LIST_OBJS) -o $(NAME)
+	$(CC) -g3 $(LIST_OBJS) -o $(NAME)
 clean:
 	rm -rf $(LIST_OBJS)
 

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdupuy <hdupuy@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: chsiffre <chsiffre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:14:01 by chsiffre          #+#    #+#             */
-/*   Updated: 2023/01/20 15:57:42 by hdupuy           ###   ########.fr       */
+/*   Updated: 2023/01/26 17:18:17 by chsiffre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
-int	ft_is_sorted(t_data *s, size_t count)
+int	ft_is_sorted(int *tab, size_t count)
 {
 	size_t	i;
 	size_t	y;
@@ -22,10 +23,8 @@ int	ft_is_sorted(t_data *s, size_t count)
 	{
 		y = i;
 		while (++y < count)
-		{
-			if (s->tab[i] > s->tab[y])
+			if (tab[i] > tab[y])
 				return (1);
-		}
 	}
 	return (0);
 }
@@ -50,28 +49,29 @@ void ft_position(t_data *s, ssize_t count)
 		}
 		s->p_a[i] = x;
 	}
+	i = -1;
 }
 
 void	ft_sort_big_stack(t_data *s)
 {
 	ssize_t	i;
 	ssize_t	y;
+	int count;
 
 	y = -1;
-	while (ft_is_sorted(s, s->count))
+	while (ft_is_sorted(s->p_a, s->count))
 	{
 		i = -1;
-		ft_printf("%d", s->count);
+		count = s->count;
 		y++;
-		while (++i < s->count)
+		while (++i < count)
 		{
-			if ((s->p_a[0] >> y) && 1 == 0)
-				pb(s);
-			else
+			if ((s->p_a[0] >> y) & 1)
 				rolling(s->p_a, s->count, "ra\n");
+			else
+				pb(s);
 		}
-		while (s->size_pb)
+		while (s->size_pb > 0)
 			pa(s);
-		ft_printf("%d", s->count);
 	}
 }
