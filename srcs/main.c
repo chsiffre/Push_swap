@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chsiffre <chsiffre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:38:23 by charles           #+#    #+#             */
-/*   Updated: 2023/01/26 16:31:57 by chsiffre         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:04:46 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	main_2(t_data *s)
 {
 	if (!ft_is_sorted(s->tab, s->count))
 		return (ft_exit(s));
-	ft_position(s, s->count);
-	s->size_pb = 0;
+	ft_init(s);
+	ft_position(s);
 	if (s->count > 5)
 		ft_sort_big_stack(s);
 	else
@@ -51,9 +51,15 @@ int	main_2(t_data *s)
 	return (0);
 }
 
+void	ft_init(t_data *s)
+{
+	s->size_pb = 0;
+	s->p_a = malloc(s->count * sizeof(int));
+	s->p_b = malloc(s->count * sizeof(int));
+}
+
 int ft_exit(t_data *s)
 {
-	(void) s;
 	free(s->tab);
 	free(s);
 	write(1, "Error\n", 6);

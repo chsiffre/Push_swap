@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chsiffre <chsiffre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:14:01 by chsiffre          #+#    #+#             */
-/*   Updated: 2023/01/26 17:18:17 by chsiffre         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:44:32 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,18 @@ int	ft_is_sorted(int *tab, size_t count)
 	return (0);
 }
 
-void ft_position(t_data *s, ssize_t count)
+void ft_position(t_data *s)
 {
 	ssize_t	i;
 	ssize_t	x;
 	ssize_t	y;
 
 	i = -1;
-	s->p_a = malloc(count * sizeof(int));
-	while (++i < count)
+	while (++i < s->count)
 	{
 		y = 0;
 		x = 0;
-		while (y < count)
+		while (y < s->count)
 		{
 			if (s->tab[i] > s->tab[y])
 				x++;
@@ -56,22 +55,26 @@ void	ft_sort_big_stack(t_data *s)
 {
 	ssize_t	i;
 	ssize_t	y;
-	int count;
 
 	y = -1;
 	while (ft_is_sorted(s->p_a, s->count))
 	{
 		i = -1;
-		count = s->count;
 		y++;
-		while (++i < count)
+		while (++i < s->count)
 		{
 			if ((s->p_a[0] >> y) & 1)
 				rolling(s->p_a, s->count, "ra\n");
 			else
-				pb(s);
+			{
+				write(1, "pb\n", 3);
+				push(s->p_a, s->p_b, s->count, s->size_pb);
+			}
 		}
 		while (s->size_pb > 0)
-			pa(s);
+		{
+			write(1, "pa\n", 3);
+			push(s->p_b, s->p_a, s->size_pb, s->count);
+		}
 	}
 }
