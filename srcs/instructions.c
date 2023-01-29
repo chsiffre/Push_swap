@@ -6,35 +6,36 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:00:41 by charles           #+#    #+#             */
-/*   Updated: 2023/01/27 14:37:45 by charles          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:48:06 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(int *tab_to, int *tab_from, int size_to, int size_from)
+void	push(t_data *from, t_data *to, char *str)
 {
 	ssize_t	i;
 	int tmp;
 	
-	if (size_to <= 0)
+	if (from->count <= 0)
 		return ;
-	i = 0;
-	tmp = tab_to[0];
-	size_to--;
-	while (++i < size_to)
-		tab_to[i] = tab_to[i + 1];
-	i = 0;
-	size_from++;
-	while (++i < size_from)
-		tab_from[i] = tab_from[i- 1];
-	tab_from[0] = tmp;
+	ft_putstr(str);
 	i = -1;
-	while (++i < size_to)
-		ft_printf("%d ", tab_to[i]);
+	tmp = from->p[0];
+	from->count--;
+	while (++i < from->count)
+		from->p[i] = from->p[i + 1];
+	i = 0;
+	to->count++;
+	while (++i < to->count)
+		to->p[i] = to->p[i- 1];
+	to->p[0] = tmp;
 	i = -1;
-	while (++i < size_from)
-		ft_printf("%d,", tab_from[i]);
+	while (++i < to->count)
+		ft_printf("%d ", to->p[i]);
+	i = -1;
+	while (++i < from->count)
+		ft_printf("%d,", from->p[i]);
 }
 
 void	ft_swaap(int *tab, ssize_t count, char *str)

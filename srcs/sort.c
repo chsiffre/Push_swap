@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:14:01 by chsiffre          #+#    #+#             */
-/*   Updated: 2023/01/27 14:44:32 by charles          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:43:12 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,35 +46,31 @@ void ft_position(t_data *s)
 				x++;
 			y++;
 		}
-		s->p_a[i] = x;
+		s->p[i] = x;
 	}
 	i = -1;
 }
 
-void	ft_sort_big_stack(t_data *s)
+void	ft_sort_big_stack(t_data *s, t_data *b)
 {
 	ssize_t	i;
 	ssize_t	y;
+	int count;
 
 	y = -1;
-	while (ft_is_sorted(s->p_a, s->count))
+	while (ft_is_sorted(s->p, s->count))
 	{
 		i = -1;
+		count = s->count;
 		y++;
-		while (++i < s->count)
+		while (++i < count)
 		{
-			if ((s->p_a[0] >> y) & 1)
-				rolling(s->p_a, s->count, "ra\n");
+			if ((s->p[0] >> y) & 1)
+				rolling(s->p, s->count, "ra\n");
 			else
-			{
-				write(1, "pb\n", 3);
-				push(s->p_a, s->p_b, s->count, s->size_pb);
-			}
+				push(s, b, "pb\n");
 		}
-		while (s->size_pb > 0)
-		{
-			write(1, "pa\n", 3);
-			push(s->p_b, s->p_a, s->size_pb, s->count);
-		}
+		while (b->count > 0)
+			push(b, s, "pa\n");
 	}
 }
