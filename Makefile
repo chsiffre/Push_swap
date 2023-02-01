@@ -71,10 +71,10 @@ DIR_HEADERS = includes/
 all : $(NAME)
 
 %.o: %.c $(DIR_SRC)libft.h Makefile
-	$(CC) $(CFLAGS) -I $(DIR_SRC) -I $(DIR_PUSH) -c $< -o ${<:.c=.o} 
+	$(CC) -fsanitize=address $(CFLAGS) -I $(DIR_SRC) -I $(DIR_PUSH) -c $< -o ${<:.c=.o} 
 
 $(NAME) : $(LIST_OBJS)
-	$(CC) -g3 $(LIST_OBJS) -o $(NAME)
+	$(CC) -fsanitize=address $(LIST_OBJS) -o $(NAME)
 clean:
 	rm -rf $(LIST_OBJS)
 

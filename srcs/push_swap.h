@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:15 by charles           #+#    #+#             */
-/*   Updated: 2023/01/29 18:51:22 by charles          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:41:52 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,8 @@ typedef struct s_data
 	size_t	x;
 }t_data;
 
-
-
-
 int		main(int ac, char **av);
-int		main_2(t_data *s, t_data *b);
+int		main_2(t_data *s);
 int		free_tab(char **strs);
 int		ft_parsing(char **av, t_data *s);
 int		arg_space(char *av);
@@ -40,7 +37,7 @@ int		ft_count_args(char **av, t_data *s);
 int		ft_is_sorted(int *tab, size_t count);
 void	ft_position(t_data *s);
 void	ft_sort_big_stack(t_data *s, t_data *b);
-void	sort_four(t_data *s);
+void	sort_four(t_data *s, t_data *b);
 void	sort_three(t_data *s);
 int		ft_free_struct(t_data *s, t_data *b);
 void	ft_sort_small_stack(t_data *s, t_data *b);

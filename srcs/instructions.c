@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:00:41 by charles           #+#    #+#             */
-/*   Updated: 2023/01/29 18:48:06 by charles          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:41:40 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	push(t_data *from, t_data *to, char *str)
 {
 	ssize_t	i;
-	int tmp;
-	
+	int		tmp;
+
 	if (from->count <= 0)
 		return ;
 	ft_putstr(str);
@@ -25,17 +25,14 @@ void	push(t_data *from, t_data *to, char *str)
 	from->count--;
 	while (++i < from->count)
 		from->p[i] = from->p[i + 1];
-	i = 0;
 	to->count++;
-	while (++i < to->count)
-		to->p[i] = to->p[i- 1];
+	i = to->count;
+	while (i > 0)
+	{
+		to->p[i] = to->p[i - 1];
+		i--;
+	}
 	to->p[0] = tmp;
-	i = -1;
-	while (++i < to->count)
-		ft_printf("%d ", to->p[i]);
-	i = -1;
-	while (++i < from->count)
-		ft_printf("%d,", from->p[i]);
 }
 
 void	ft_swaap(int *tab, ssize_t count, char *str)

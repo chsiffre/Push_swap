@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:38:23 by charles           #+#    #+#             */
-/*   Updated: 2023/01/29 18:53:44 by charles          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:45:22 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int ac, char **av)
 {
 	t_data	*s;
-	t_data	*b;
 
 	s = malloc(sizeof(t_data));
 	if (ac < 2)
@@ -32,37 +31,40 @@ int	main(int ac, char **av)
 		if (ft_parsing(av, s) == 1)
 			return (0);
 	}
-	b = ft_init(s);
-	main_2(s, b);
+	main_2(s);
 }
 
-int	main_2(t_data *s, t_data *b)
+int	main_2(t_data *s)
 {
+	t_data	*b;
+
 	if (!ft_is_sorted(s->tab, s->count))
 		return (ft_exit(s));
+	b = ft_init(s);
 	ft_position(s);
 	if (s->count > 5)
 		ft_sort_big_stack(s, b);
 	else
 		ft_sort_small_stack(s, b);
-	ft_free_struct(s ,b);
+	ft_free_struct(s, b);
 	return (0);
 }
 
 t_data	*ft_init(t_data *s)
 {
-	t_data *b;
-	
+	t_data	*b;
+
 	b = malloc(sizeof(t_data));
 	if (!b)
 		return (NULL);
 	b->count = 0;
-	s->p = malloc(s->count * sizeof(int));
+	s->p = ft_calloc((s->count + 1), sizeof(int));
 	if (!s->p)
 		return (NULL);
-	b->p = malloc(s->count * sizeof(int));
+	b->p = ft_calloc((s->count + 1), sizeof(int));
 	if (!b->p)
 		return (NULL);
+	return (b);
 }
 
 int	ft_free_struct(t_data *s, t_data *b)
@@ -78,7 +80,7 @@ int	ft_free_struct(t_data *s, t_data *b)
 	return (0);
 }
 
-int ft_exit(t_data *s)
+int	ft_exit(t_data *s)
 {
 	free(s->tab);
 	free(s);

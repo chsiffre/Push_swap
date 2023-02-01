@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:56:29 by chsiffre          #+#    #+#             */
-/*   Updated: 2023/01/29 18:44:45 by charles          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:21:24 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	ft_sort_small_stack(t_data *s, t_data *b)
 	else if (s->count == 3)
 		sort_three(s);
 	else if (s->count == 4)
-		sort_four(s);
+		sort_four(s, b);
 	size = s->count;
 	i = -1;
 	while (size > ++i)
 	{
 		if (s->p[0] < 2)
-			pb(s);
+			push(s, b, "pb\n");
 		else
 			rolling(s->p, s->count, "ra\n");
 	}
@@ -36,7 +36,7 @@ void	ft_sort_small_stack(t_data *s, t_data *b)
 		ft_swaap(b->p, b->count, "sb\n");
 	sort_three(s);
 	while (b->count)
-		pa(s);
+		push(b, s, "pa\n");
 }
 
 void	sort_three(t_data *s)
@@ -63,13 +63,13 @@ void	sort_three(t_data *s)
 	}
 }
 
-void	sort_four(t_data *s)
+void	sort_four(t_data *s, t_data *b)
 {
 	if (ft_is_sorted(s->p, s->count))
 	{
-		pb(s);
+		push(s, b, "pb\n");
 		sort_three(s);
-		pa(s);
+		push(b, s, "pa\n");
 		if (s->p[0] == 2)
 		{
 			ft_swaap(s->p, s->count, "sa\n");

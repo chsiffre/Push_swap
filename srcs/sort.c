@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:14:01 by chsiffre          #+#    #+#             */
-/*   Updated: 2023/01/29 18:43:12 by charles          ###   ########.fr       */
+/*   Updated: 2023/02/01 14:54:56 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_is_sorted(int *tab, size_t count)
 	return (0);
 }
 
-void ft_position(t_data *s)
+void	ft_position(t_data *s)
 {
 	ssize_t	i;
 	ssize_t	x;
@@ -55,7 +55,7 @@ void	ft_sort_big_stack(t_data *s, t_data *b)
 {
 	ssize_t	i;
 	ssize_t	y;
-	int count;
+	int		count;
 
 	y = -1;
 	while (ft_is_sorted(s->p, s->count))
