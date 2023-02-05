@@ -6,12 +6,11 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:14:01 by chsiffre          #+#    #+#             */
-/*   Updated: 2023/02/01 14:54:56 by charles          ###   ########.fr       */
+/*   Updated: 2023/02/05 18:49:10 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	ft_is_sorted(int *tab, size_t count)
 {

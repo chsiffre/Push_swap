@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:38:23 by charles           #+#    #+#             */
-/*   Updated: 2023/02/01 14:45:22 by charles          ###   ########.fr       */
+/*   Updated: 2023/02/05 18:48:30 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main_2(t_data *s)
 	t_data	*b;
 
 	if (!ft_is_sorted(s->tab, s->count))
-		return (ft_exit(s));
+		return (free(s->tab), free(s), 0);
 	b = ft_init(s);
 	ft_position(s);
 	if (s->count > 5)

@@ -6,7 +6,7 @@
 /*   By: charles <charles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:12 by charles           #+#    #+#             */
-/*   Updated: 2023/02/01 14:52:49 by charles          ###   ########.fr       */
+/*   Updated: 2023/02/05 18:50:27 by charles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	arg_space(char *av)
 	{
 		if (!ft_isdigit(av[i]) && av[i] != ' ' && av[i] != '-')
 			return (2);
-		// if (av[i] == '-' && av[i + 2] && (!ft_isdigit(av[i + 2]) || av[i + 2] != ' '))
-		// 	return (2);
 		if (av[i] == ' ')
 			return (1);
 		i++;
